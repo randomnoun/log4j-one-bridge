@@ -1,7 +1,10 @@
 
+
 # log4j-one-bridge
 
 **log4j-one-bridge** allows code written for log4j 2 to work using **log4j 1**.
+
+( where log4j 1 is your primary logging framework, i.e. where all your logging configuration is, and where all the appenders live ).  
 
 It's another little rectangle on that diagram you have of every Java logging framework that exists, and the shims and wrappers required to get them all working together.
 
@@ -23,7 +26,7 @@ You might prefer this if
 
 ## Background and opinionated rant
 
-I already wrote this on the log4j-one README, so go and check that out. 
+I already wrote this on the [log4j-one](https://github.com/randomnoun/log4j-one) README, so go and check that out. 
 
 
 ## What's in the box ?
@@ -57,7 +60,7 @@ log4j-one-bridge is licensed under the BSD 2-clause license.
 
 ## Footnotes
 
-[*] - you may have noticed that the org.apache.log4j.spi.LoggingEvent provided in log4j 2's log4j-1.2-api-2.14.0.jar, has a ***final*** getTimeStamp() method that returns zero.
+[*] - you may have noticed that the [org.apache.log4j.spi.LoggingEvent](https://git-wip-us.apache.org/repos/asf?p=logging-log4j2.git;a=blob;f=log4j-1.2-api/src/main/java/org/apache/log4j/spi/LoggingEvent.java;h=8d26d26e93b3ff7809dce4b55e2d8a76e5c2aa20;hb=HEAD) provided in log4j 2's log4j-1.2-api-2.14.0.jar, has a ***final*** getTimeStamp() method that returns zero.
 
 Let that sink in for a bit. 
 
