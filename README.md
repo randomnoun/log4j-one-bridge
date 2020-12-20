@@ -11,7 +11,7 @@ The main use case is that you've got an existing webapp with a few dozen depende
 
 log4j-one-bridge is the spiritual equivalent of the [compatibility layer](https://logging.apache.org/log4j/2.x/manual/compatibility.html) that log4j2 supplies to get code written for log4j 1 logging in log4j 2, except 
 * it allows code written for log4j 2 to log in log4j 1 instead,
-* it actually works, and 
+* it actually works [*], and 
 * it doesn't attempt to reimplement the entire logging framework in the process.
 
 It does this by allowing the user to include both the "real" log4j 1 and log4j 2 libraries in their app, and configures log4j 2 to write to log4j 1 loggers.
@@ -19,7 +19,7 @@ It does this by allowing the user to include both the "real" log4j 1 and log4j 2
 You might prefer this if 
 * you've spent a few hours getting your logging configuration just right, and you can't be arsed going through that again, or 
 * you've written some tools around your logging framework that use the log4j 1 configuration API, so you want everything funnelled into that
-* 
+
 
 ## Background and opinionated rant
 
@@ -54,3 +54,13 @@ Or from here on maven central, until such time that I create a release on github
 ## Licensing
 
 log4j-one-bridge is licensed under the BSD 2-clause license.
+
+## Footnotes
+
+[*] - you may have noticed that the org.apache.log4j.spi.LoggingEvent provided in log4j 2's log4j-1.2-api-2.14.0.jar, has a ***final*** getTimeStamp() method that returns zero.
+
+Let that sink in for a bit. 
+
+Which means we're up to version 14 of this fancy new wrapper in this fancy new logging framework and all your log4j 1 log events are still being timestamped as 00:00:00 UTC on 1 January 1970. 
+
+I'm surprised amidst the maze of configuration strategy adapter builder classes they didn't set the message to null as well, and maybe pipe it all into /dev/null as a sort of encore.
