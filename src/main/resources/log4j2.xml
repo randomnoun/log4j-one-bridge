@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration packages="com.jacobistrategies.web.log4j" status="WARN">
+    <Appenders>
+        <Log4j2To1Appender name="log4j1"><!--  com.jacobistrategies.web.log4j.Log4j2To1Appender.Log4j2To1Appender  -->
+        </Log4j2To1Appender>
+    </Appenders>
+    <Loggers>
+	    <Root level="trace">
+	        <AppenderRef ref="log4j1"/>
+	    </Root>
+	</Loggers>
+</Configuration>
