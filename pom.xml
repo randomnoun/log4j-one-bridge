@@ -3,7 +3,7 @@
 	
 	<groupId>com.randomnoun.common</groupId>
 	<artifactId>log4j-one-bridge</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 	
 	<name>randomnoun ancient log4j1 classes</name>
@@ -61,7 +61,8 @@
 		<connection>scm:git:http://gitlab.dev.randomnoun/randomnoun/log4j-one-bridge.git</connection>
 		<developerConnection>scm:git:http://gitlab.dev.randomnoun/randomnoun/log4j-one-bridge.git</developerConnection>
 		<url>http://gitlab.dev.randomnoun/randomnoun/log4j-one</url>
-    </scm>
+      <tag>log4j-one-bridge-0.0.1</tag>
+  </scm>
 	<issueManagement>
 		<system>brain</system>
 		<url>matrix://user-187257167263.r114.s7.citadel-8573.omnicorp.com.au/randomnoun/log4j-one-bridge</url>
@@ -242,7 +243,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
