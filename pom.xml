@@ -1,0 +1,358 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.randomnoun.common</groupId>
+	<artifactId>log4j-one-bridge</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+	<name>randomnoun ancient log4j1 classes</name>
+	<description>
+		Adding this dependency to your project will also add a log4j2.xml file to the classpath 
+		which will cause any log4j2 loggers to get redirected back into good ol' log4j1. 
+	</description>
+	<url>http://code.randomnoun.com/log4j-one-bridge/index.html</url>
+	<inceptionYear>2020</inceptionYear>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.springframework.version>5.3.1</org.springframework.version><!--  was 4.3.20.RELEASE -->
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jms</artifactId>
+					<groupId>javax.jms</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jmxtools</artifactId>
+					<groupId>com.sun.jdmk</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jmxri</artifactId>
+					<groupId>com.sun.jmx</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- for the Log4j2To1Appender -->		
+		<dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.14.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+	</dependencies>
+
+	
+	<scm>
+		<connection>scm:git:ssh://git@gitlab.dev.randomnoun:2222/randomnoun/log4j-one-bridge.git</connection>
+		<developerConnection>scm:git:ssh://git@gitlab.dev.randomnoun:2222/randomnoun/log4j-one-bridge.git</developerConnection>
+		<url>http://gitlab.dev.randomnoun/randomnoun/log4j-one-bridge</url>
+	</scm>
+	<issueManagement>
+		<system>jira</system>
+		<url>http://jira.dev.randomnoun/LOGJ4ONEBRIDGE</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Bamboo</system>
+		<url>http://bamboo.dev.randomnoun:8085/bamboo/browse/RANDOMNOUN-LOGJ4ONEBRIDGE</url>
+	</ciManagement>
+	<licenses>
+		<license>
+			<name>Simplified BSD License</name>
+			<url>http://www.randomnoun.com/licences/bsd-simplified.txt</url>
+			<!-- <url>http://opensource.org/licenses/BSD-2-Clause</url> -->
+			<distribution>repo</distribution>
+			<comments>Simplified BSD License (BSD 2-clause license).</comments>
+		</license>
+	</licenses>
+	<mailingLists>
+		<mailingList>
+			<name>log4j-one-bridge Mailing List</name>
+			<subscribe>log4j-one-bridge-subscribe@lists.randomnoun.com</subscribe>
+			<unsubscribe>log4j-one-bridge-unsubscribe@lists.randomnoun.com</unsubscribe>
+			<post>log4j-one-bridge@lists.randomnoun.com</post>
+			<archive>http://lists.randomnoun.com/pipermail/log4j-one-bridge/</archive>
+		</mailingList>
+		<!-- TODO: a generic announcements / notifications list -->
+	</mailingLists>
+	<organization>
+		<name>randomnoun</name>
+		<url>http://www.randomnoun.com</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>knoxg</id>
+			<name>Greg Knox</name>
+			<email>knoxg@randomnoun.com</email>
+			<organization>randomnoun</organization>
+			<organizationUrl>http://www.randomnoun.com</organizationUrl>
+			<roles>
+				<role>Software Gazelle</role>
+			</roles>
+			<timezone>Australia/Brisbane</timezone>
+			<properties>
+				<picUrl>http://www.gravatar.com/avatar/10b6f00fa8d70d6f4e042558a9433086.jpg?s=32</picUrl>
+			</properties>
+		</developer>
+	</developers>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>javacc-maven-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<id>jtb-javacc</id>
+						<goals>
+							<goal>jtb-javacc</goal>
+						</goals>
+						<configuration>
+							<nodePackageName>com.randomnoun.common.jexl.ast</nodePackageName>
+							<visitorPackageName>com.randomnoun.common.jexl.visitor</visitorPackageName>
+							<javadocFriendlyComments>true</javadocFriendlyComments>
+							<descriptiveFieldNames>true</descriptiveFieldNames>
+							<printer>true</printer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.15</version>
+                    <configuration>
+                        <!--  x<argLine>${surefireArgLine} ${surefireArgLine2}</argLine> -->
+                        <systemPropertyVariables>
+                            <runOrder>alphabetical</runOrder>
+                        </systemPropertyVariables>
+                        <includes>
+                            <include>**/*Test.java</include>
+                            <include>**/*TestSuite.java</include>
+                        </includes>
+                        <excludes>
+                            <!-- exclude the log4j1 tests -->
+                            <exclude>**/log4j/*Test.java</exclude>
+                        </excludes>
+                    </configuration>
+
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.2</version>
+					<dependencies>
+						<dependency>
+							<groupId>lt.velykis.maven.skins</groupId>
+							<artifactId>reflow-velocity-tools</artifactId>
+							<version>1.0.0</version>
+						</dependency>
+						<!-- Reflow skin requires Velocity >= 1.7 -->
+						<dependency>
+							<groupId>org.apache.velocity</groupId>
+							<artifactId>velocity</artifactId>
+							<version>1.7</version>
+						</dependency>
+						<dependency>
+							<groupId>com.randomnoun.maven.doxia</groupId>
+							<artifactId>doxia-module-html</artifactId>
+							<version>1.1.0</version>
+						</dependency>
+						<dependency>
+							<!-- add support for ssh/scp -->
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-ssh</artifactId>
+							<version>1.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											javacc-maven-plugin
+										</artifactId>
+										<versionRange>
+											[2.5,)
+										</versionRange>
+										<goals>
+											<goal>jtb-javacc</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+   <!-- 
+     The performRelease profile is automatically included when performing releases.
+     Don't forget to install the appropriate version of gpg.exe, and include the 
+       -Darguments=-Dgpg.passphrase=PASSPHRASE -Dgpg.passphrase=PASSPHRASE 
+     command-line options when releasing, as per 
+       https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven 
+     unless that doesn't work, in which case updating settings.xml instead, as per 
+       http://stackoverflow.com/questions/14114528/avoid-gpg-signing-prompt-when-using-maven-release-plugin 
+     -->
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
+	<reporting>
+		<plugins>
+		<!-- 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<stylesheetfile>${project.basedir}/src/main/javadoc/stylesheet.css</stylesheetfile>
+					<javadocDirectory>${project.basedir}/src/main/javadoc</javadocDirectory>
+					<docfilessubdirs>true</docfilessubdirs>
+					<author>true</author>
+					<linksource>true</linksource>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<formats>
+						<format>html</format>
+						<format>xml</format>
+					</formats>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.16</version>
+				<configuration>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<linkJavadoc>true</linkJavadoc>
+					<javadocDir>target/site/apidocs</javadocDir>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</reporting>
+
+
+	<distributionManagement>
+	    <repository>
+	        <id>releases</id>
+	        <name>randomnoun releases</name>
+	        <url>http://nexus2.dev.randomnoun/nexus/content/repositories/releases/</url>
+	    </repository>
+	    <snapshotRepository>
+	        <id>snapshots</id>
+	        <name>randomnoun snapshots</name>
+	        <url>http://nexus2.dev.randomnoun/nexus/content/repositories/snapshots/</url>
+	        <uniqueVersion>false</uniqueVersion>
+	    </snapshotRepository>
+		<site>
+			<id>site</id>
+			<name>log4j-one-bridge Website</name>
+			<!-- this will be externally visible at http://code.randomnoun.com/log4j-one-bridge -->
+			<url>scp://code.randomnoun.com/var/www/code.randomnoun.com/log4j-one-bridge/</url>
+		</site>
+	</distributionManagement>
+
+</project>
