@@ -59,10 +59,10 @@
 
 	
 	<scm>
-		<connection>scm:git:ssh://git@gitlab.dev.randomnoun:2222/randomnoun/log4j-one-bridge.git</connection>
-		<developerConnection>scm:git:ssh://git@gitlab.dev.randomnoun:2222/randomnoun/log4j-one-bridge.git</developerConnection>
-		<url>http://gitlab.dev.randomnoun/randomnoun/log4j-one-bridge</url>
-	</scm>
+		<connection>scm:git:http://gitlab.dev.randomnoun/randomnoun/log4j-one-bridge.git</connection>
+		<developerConnection>scm:git:http://gitlab.dev.randomnoun/randomnoun/log4j-one-bridge.git</developerConnection>
+		<url>http://gitlab.dev.randomnoun/randomnoun/log4j-one</url>
+    </scm>
 	<issueManagement>
 		<system>jira</system>
 		<url>http://jira.dev.randomnoun/LOGJ4ONEBRIDGE</url>
