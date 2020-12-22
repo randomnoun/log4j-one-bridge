@@ -24,11 +24,6 @@ You might prefer this if
 * you've written some tools around your logging framework that use the log4j 1 configuration API, so you want everything funnelled into that
 
 
-## Background and opinionated rant
-
-I already wrote this on the [log4j-one](https://github.com/randomnoun/log4j-one) README, so go and check that out. 
-
-
 ## What's in the box ?
 
 Surprisingly little.
@@ -53,6 +48,22 @@ Add this to your pom.xml, or pom.xml equivalent:
 </dependency>
 ```
 Or from here on maven central, until such time that I create a release on github:  https://repo1.maven.org/maven2/com/randomnoun/common/log4j-one-bridge/0.0.1/
+
+
+## Background and opinionated rant on log4j 2
+
+Well, everyone who uses log4j now realises the folly of their ways and now know they need to add a 
+couple of seconds to their startup time whilst their logging framework initialises, 
+and who amongst us can honestly say that they don't want to spend time understanding 
+arbitrary changes to configuration APIs and file formats ? 
+
+Which apparently is the problem that log4j2 was born to solve.
+
+And it's a doozy of a configuration API, let me tell you. If you haven't created a factory 
+for the builder for the builder for the configuration object, 
+(that can't be composed of any object other than Strings, mind you) that calls the factory 
+of the builder of the builder of the logger appender then you haven't lived.
+
 
 ## Licensing
 
