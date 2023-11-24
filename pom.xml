@@ -6,7 +6,8 @@
 	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
-	<name>randomnoun ancient log4j1 classes</name>
+	<!-- this should probably funnel every logging framework under the sun into log4j really -->
+	<name>log4j one funnel</name>
 	<description>
 		Adding this dependency to your project will also add a log4j2.xml file to the classpath 
 		which will cause any log4j2 loggers to get redirected back into good ol' log4j1. 
@@ -21,28 +22,17 @@
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
+			
+			
+			
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 			<version>4.12</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>jms</artifactId>
-					<groupId>javax.jms</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>jmxtools</artifactId>
-					<groupId>com.sun.jdmk</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>jmxri</artifactId>
-					<groupId>com.sun.jmx</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>com.randomnoun.log4j</groupId>
+            <artifactId>log4j-good-bits</artifactId>
+            <version>1.2.17-1</version>
 		</dependency>
 
 		<!-- for the Log4j2To1Appender -->		
