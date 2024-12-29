@@ -3,47 +3,43 @@
 	
 	<groupId>com.randomnoun.common</groupId>
 	<artifactId>log4j-one-bridge</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
 	<!-- this should probably funnel every logging framework under the sun into log4j really -->
 	<name>log4j one funnel</name>
 	<description>
 		Adding this dependency to your project will also add a log4j2.xml file to the classpath 
-		which will cause any log4j2 loggers to get redirected back into good ol' log4j1. 
+		which will cause any log4j2 loggers to get redirected back into log4j1. 
 	</description>
 	<url>https://github.com/randomnoun/log4j-one-bridge</url>
 	<inceptionYear>2020</inceptionYear>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<github.release.targetCommitish>master</github.release.targetCommitish>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
-			
-			
-			
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-			<version>4.12</version>
+			<version>4.13.2</version>
 		</dependency>
-		<dependency>
-			<groupId>com.randomnoun.log4j</groupId>
-            <artifactId>log4j-good-bits</artifactId>
-            <version>1.2.17-1</version>
-		</dependency>
+	    <dependency>
+            <!-- this dep replaces log4j:log4j 1.2.17, fixing CVEs -->
+            <groupId>ch.qos.reload4j</groupId>
+            <artifactId>reload4j</artifactId>
+            <version>1.2.26</version>
+        </dependency>
 
-		<!-- for the Log4j2To1Appender -->		
 		<dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.14.0</version>
+            <version>2.24.3</version>
             <scope>provided</scope>
         </dependency>
-
-
 	</dependencies>
 
 	
@@ -53,14 +49,6 @@
 		<url>http://gitlab.dev.randomnoun/randomnoun/log4j-one</url>
       <tag>HEAD</tag>
   </scm>
-	<issueManagement>
-		<system>brain</system>
-		<url>matrix://user-187257167263.r114.s7.citadel-8573.omnicorp.com.au/randomnoun/log4j-one-bridge</url>
-	</issueManagement>
-	<ciManagement>
-		<system>Bamboo</system>
-		<url>http://bamboo.dev.randomnoun/browse/RANDOMNOUN-LOG4JONEBRIDGE</url>
-	</ciManagement>
 	<licenses>
 		<license>
 			<name>Simplified BSD License</name>
@@ -70,15 +58,6 @@
 			<comments>Simplified BSD License (BSD 2-clause license).</comments>
 		</license>
 	</licenses>
-	<mailingLists>
-		<mailingList>
-			<name>log4j-one-bridge Mailing List</name>
-			<subscribe>log4j-one-bridge-subscribe@lists.randomnoun.com</subscribe>
-			<unsubscribe>log4j-one-bridge-unsubscribe@lists.randomnoun.com</unsubscribe>
-			<post>log4j-one-bridge@lists.randomnoun.com</post>
-			<archive>http://lists.randomnoun.com/pipermail/log4j-one-bridge/</archive>
-		</mailingList>
-	</mailingLists>
 	<organization>
 		<name>randomnoun</name>
 		<url>http://www.randomnoun.com</url>
@@ -101,28 +80,6 @@
 	</developers>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>javacc-maven-plugin</artifactId>
-				<version>2.5</version>
-				<executions>
-					<execution>
-						<id>jtb-javacc</id>
-						<goals>
-							<goal>jtb-javacc</goal>
-						</goals>
-						<configuration>
-							<nodePackageName>com.randomnoun.common.jexl.ast</nodePackageName>
-							<visitorPackageName>com.randomnoun.common.jexl.visitor</visitorPackageName>
-							<javadocFriendlyComments>true</javadocFriendlyComments>
-							<descriptiveFieldNames>true</descriptiveFieldNames>
-							<printer>true</printer>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -130,8 +87,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>
 					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>8</source>
+						<target>8</target>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -181,13 +138,6 @@
 							<artifactId>doxia-module-html</artifactId>
 							<version>1.1.0</version>
 						</dependency>
-						<!--  
-						<dependency>
-							<groupId>net.trajano.wagon</groupId>
-				            <artifactId>wagon-git</artifactId>
-				            <version>2.0.3</version>
-						</dependency>
-						 -->
 					</dependencies>
 				</plugin>
 				
@@ -209,50 +159,29 @@
 					</configuration>
 				</plugin>
 				
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											javacc-maven-plugin
-										</artifactId>
-										<versionRange>
-											[2.5,)
-										</versionRange>
-										<goals>
-											<goal>jtb-javacc</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
+                    <groupId>com.ragedunicorn.tools.maven</groupId>
+                    <artifactId>github-release-maven-plugin</artifactId>
+                    <version>1.0.7</version>
+                    <executions>
+                      <execution>
+                        <id>default-cli</id>
+                        <configuration>
+                          <owner>randomnoun</owner>
+                          <repository>${project.artifactId}</repository>
+                          <server>github-release-token</server>
+                          <tagName>v${project.version}</tagName>
+                          <name>v${project.version}</name>
+                          <targetCommitish>${github.release.targetCommitish}</targetCommitish>
+                          <releaseNotes>src/site/release-notes.md</releaseNotes>
+                        </configuration>
+                      </execution>
+                    </executions>
+                </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
 
-   <!-- 
-     The performRelease profile is automatically included when performing releases.
-     Don't forget to install the appropriate version of gpg.exe, and include the 
-       -Darguments=-Dgpg.passphrase=PASSPHRASE -Dgpg.passphrase=PASSPHRASE 
-     command-line options when releasing, as per 
-       https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven 
-     unless that doesn't work, in which case updating settings.xml instead, as per 
-       http://stackoverflow.com/questions/14114528/avoid-gpg-signing-prompt-when-using-maven-release-plugin 
-     -->
 	<profiles>
 		<profile>
 			<id>release-sign-artifacts</id>
