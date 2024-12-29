@@ -3,7 +3,7 @@
 	
 	<groupId>com.randomnoun.common</groupId>
 	<artifactId>log4j-one-bridge</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	
 	<!-- this should probably funnel every logging framework under the sun into log4j really -->
@@ -47,7 +47,7 @@
 		<connection>scm:git:http://gitlab.dev.randomnoun/randomnoun/log4j-one-bridge.git</connection>
 		<developerConnection>scm:git:http://gitlab.dev.randomnoun/randomnoun/log4j-one-bridge.git</developerConnection>
 		<url>http://gitlab.dev.randomnoun/randomnoun/log4j-one</url>
-      <tag>HEAD</tag>
+      <tag>log4j-one-bridge-1.0.0</tag>
   </scm>
 	<licenses>
 		<license>
