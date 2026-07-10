@@ -6,6 +6,7 @@ import java.util.concurrent.locks.*;
 import org.apache.logging.log4j.core.*;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.appender.AppenderLoggingException;
+import org.apache.logging.log4j.core.config.Property;
 import org.apache.logging.log4j.core.config.plugins.*;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 
@@ -30,9 +31,9 @@ import org.apache.logging.log4j.core.layout.PatternLayout;
  *  
  * <pre>
 &lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;Configuration packages="com.randomnoun.common.log4j" status="WARN">
+&lt;Configuration status="WARN">
     &lt;Appenders>
-        &lt;Log4j2To1Appender name="log4j1">&lt;!--  com.randomnoun.common.log4j.Log4j2To1Appender.Log4j2To1Appender  -->
+        &lt;Log4j2To1Appender name="log4j1">
         &lt;/Log4j2To1Appender>
     &lt;/Appenders>
     &lt;Loggers>
@@ -63,14 +64,12 @@ import org.apache.logging.log4j.core.layout.PatternLayout;
 @Plugin(name="Log4j2To1Appender", category="Core", elementType="appender", printObject=true)
 public final class Log4j2To1Appender extends AbstractAppender {
 
-	/** Generated serialVersionUID */
-	private static final long serialVersionUID = -6911739214799667658L;
 	private final ReadWriteLock rwLock = new ReentrantReadWriteLock();
     private final Lock readLock = rwLock.readLock();
 
     protected Log4j2To1Appender(String name, Filter filter,
             Layout<? extends Serializable> layout, final boolean ignoreExceptions) {
-        super(name, filter, layout, ignoreExceptions);
+        super(name, filter, layout, ignoreExceptions, Property.EMPTY_ARRAY);
     }
 
     @Override
