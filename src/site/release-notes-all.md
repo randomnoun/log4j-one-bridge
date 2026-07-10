@@ -1,3 +1,10 @@
+# 1.0.1
+
+## Updates
+
+* Dependency bump
+* New log4j packaging format
+
 # 1.0.0
 
 ## Updates
